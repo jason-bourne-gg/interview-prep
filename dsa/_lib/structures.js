@@ -109,4 +109,43 @@ function toTree(arr) {
   return root
 }
 
-module.exports = { MinHeap, DSU, ListNode, TreeNode, toList, fromList, toTree }
+/**
+ * Undirected graph node, the shape used by Clone Graph.
+ *
+ * Neighbours are stored on the node itself, so there is no adjacency list to
+ * consult — traversal means following object references, and identity (not
+ * value) is what tells you whether you have already seen a node.
+ */
+class GraphNode {
+  constructor(val = 0, neighbors = []) { this.val = val; this.neighbors = neighbors }
+}
+
+/**
+ * Build a graph from an adjacency list and read one back.
+ *
+ * Index i of the array describes node i + 1, matching the 1-indexed notation
+ * problem statements use: [[2,4],[1,3],[2,4],[1,3]] is a four-node square.
+ * fromGraph sorts each neighbour list so two graphs compare equal regardless of
+ * the order a clone happened to wire them in.
+ */
+function toGraph(adj) {
+  if (!adj.length) return null
+  const nodes = adj.map((_, i) => new GraphNode(i + 1))
+  adj.forEach((neighbours, i) => { nodes[i].neighbors = neighbours.map(v => nodes[v - 1]) })
+  return nodes[0]
+}
+
+function fromGraph(node) {
+  if (!node) return []
+  const out = new Map()
+  const queue = [node]
+  out.set(node.val, null)
+  for (let i = 0; i < queue.length; i++) {
+    const cur = queue[i]
+    out.set(cur.val, cur.neighbors.map(n => n.val).sort((a, b) => a - b))
+    for (const nxt of cur.neighbors) if (!out.has(nxt.val)) { out.set(nxt.val, null); queue.push(nxt) }
+  }
+  return [...out.keys()].sort((a, b) => a - b).map(k => out.get(k))
+}
+
+module.exports = { MinHeap, DSU, ListNode, TreeNode, GraphNode, toList, fromList, toTree, toGraph, fromGraph }

@@ -15,7 +15,7 @@ Vol 1 & 2, ByteByteGo, `donnemartin/system-design-primer` (371k★),
 | 7 | [Key-value store](07-key-value-store.md) | 5/7 | Partitioning, quorum, replication |
 | 8 | [Web crawler](08-web-crawler.md) | 4/7 | Frontier, politeness, dedup at scale |
 | 9 | [Notification system](09-notification-system.md) | 3/7 | Multi-channel, retries, dedup |
-| 10 | [LLM product / ChatGPT](10-llm-product.md) | new | Streaming, GPU economics, evals |
+| 10 | [LLM application platform](10-llm-application.md) | new | Streaming, GPU economics, evals |
 
 **Two deliberate choices.** Consistent hashing appears in as many sources as
 some of these, but it is a *primitive*, not a product — it lives in
@@ -24,3 +24,5 @@ which is the clearest change to this round since 2024.
 
 **Read [the framework](../framework.md) first.** Every write-up below assumes the
 four phases and skips straight to the substance.
+
+**The other round:** [LLD — 10 problems](../lld/).

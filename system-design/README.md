@@ -12,8 +12,8 @@ tested on whether you can model a domain and write code someone else can extend.
 |---|---|
 | **[The framework](framework.md)** | How to spend the 45 minutes, and the numbers to memorise |
 | **[Fundamentals](fundamentals.md)** | CAP, consistent hashing, sharding, caching, queues — the vocabulary |
-| **[HLD — 10 problems](hld/)** | The ones that actually recur |
-| **[LLD — 10 problems](lld/)** | With working JavaScript, not pseudocode |
+| **[HLD — 10 problems](hld/README.md)** | The ones that actually recur |
+| **[LLD — 10 problems](lld/README.md)** | With working JavaScript, not pseudocode |
 
 ---
 
