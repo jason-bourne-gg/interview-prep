@@ -1,0 +1,8 @@
+{
+  "name": "interview-prep",
+  "private": true,
+  "description": "Blind 75 in JavaScript, system design, and the AI round",
+  "scripts": {
+    "test": "node run-tests.js"
+  }
+}
