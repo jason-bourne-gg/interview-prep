@@ -25,4 +25,4 @@ which is the clearest change to this round since 2024.
 **Read [the framework](../framework.md) first.** Every write-up below assumes the
 four phases and skips straight to the substance.
 
-**The other round:** [LLD — 10 problems](../lld/).
+**The other round:** [LLD — 11 problems](../lld/).

@@ -1,6 +1,6 @@
 # System design
 
-Two rounds, two different skills.
+Two rounds, two different skills. 10 HLD problems, 11 LLD.
 
 **HLD** — "design Twitter". Boxes, arrows, tradeoffs, numbers. You are being
 tested on whether you can reason about scale and *defend a choice*.
@@ -13,11 +13,11 @@ tested on whether you can model a domain and write code someone else can extend.
 | **[The framework](framework.md)** | How to spend the 45 minutes, and the numbers to memorise |
 | **[Fundamentals](fundamentals.md)** | CAP, consistent hashing, sharding, caching, queues — the vocabulary |
 | **[HLD — 10 problems](hld/README.md)** | The ones that actually recur |
-| **[LLD — 10 problems](lld/README.md)** | With working JavaScript, not pseudocode |
+| **[LLD — 11 problems](lld/README.md)** | With working JavaScript, not pseudocode |
 
 ---
 
-## Which 10, and why those
+## Which problems, and why those
 
 The HLD list is cross-tabulated from what the standard sources actually teach —
 Alex Xu's two volumes, ByteByteGo, `donnemartin/system-design-primer`,
@@ -32,7 +32,9 @@ changed about this round since 2024 — Hello Interview is currently the only
 major source shipping one, and it is going to spread.
 
 The LLD list follows `ashishps1/awesome-low-level-design` (27k stars) and the
-Grokking OOD case studies, which agree closely.
+Grokking OOD case studies, which agree closely. The eleventh is there for a
+different reason: it is a **progressive spec**, where the requirements arrive one
+at a time and the grade is how the design absorbs each change.
 
 ## The trap in both rounds
 

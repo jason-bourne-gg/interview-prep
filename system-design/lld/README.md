@@ -1,4 +1,4 @@
-# LLD — 10 problems
+# LLD — 11 problems
 
 The list follows `ashishps1/awesome-low-level-design` (27k★) and the Grokking
 OOD case studies, which agree closely. Each write-up is working JavaScript, not
@@ -20,6 +20,12 @@ the question the interviewer is actually asking.
 | 8 | [Vending machine](08-vending-machine.md) | Compact state machine with a genuinely hard core — bounded change-making, where greedy is wrong |
 | 9 | [Library management](09-library-management.md) | Entity modelling — the bibliographic record is not the physical copy, and folding them loses every real query |
 | 10 | [Ride-sharing](10-ride-sharing.md) | A contended resource handed between two long-running state machines, with a human-latency timeout in the middle |
+| 11 | [In-memory key-value store](11-in-memory-store.md) | One read path behind one accessor — so a requirement you have not heard yet is an edit in one place, not thirty |
+
+**Problem 11 is a different format.** The first ten hand you the whole
+requirement up front. Eleven is a *progressive spec*: the requirements arrive one
+at a time, over the hour, and the grade is how well the design absorbs each one.
+Do it last, and do it after you have done at least two of the others.
 
 ---
 

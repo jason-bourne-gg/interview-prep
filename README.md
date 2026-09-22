@@ -1,22 +1,31 @@
 # Interview prep
 
-Blind 75 in JavaScript, 20 system design problems, and the AI/ML round — written
-to be *read*, not just copied.
+Blind 75 in JavaScript, 21 system design problems, the LLM and agentic round, and
+the rounds that are not about code — written to be *read*, not just copied.
 
-Every DSA solution shows the ladder: **brute force → better → optimal**, with the
-reasoning that gets you from one rung to the next. That progression is what an
-interviewer is actually listening for.
+## Start here
+
+**[REVISE.md](REVISE.md)** — the revision plan. What to read, in what order, and
+what to skip when the interview is tomorrow. Everything below is the map it
+routes into.
 
 | | |
 |---|---|
 | **[DSA](dsa/)** | Blind 75 in JS, grouped by pattern, every approach |
 | **[JavaScript](javascript/)** | The pitfalls that break correct algorithms, and the language round |
-| **[System design](system-design/)** | 10 HLD + 10 LLD, the ones that actually recur |
-| **[AI](ai/)** | Definitions, the deep tech, and scenario answers |
+| **[System design](system-design/)** | 10 HLD + 11 LLD, the ones that actually recur |
+| **[AI](ai/)** | LLM, GenAI and agentic. Interview questions, answers you can say out loud |
+| **[Rounds](rounds/)** | Behavioural, take-homes, and the AI-assisted coding round |
+
+Every DSA solution shows the ladder: **brute force → better → optimal**, with the
+reasoning that gets you from one rung to the next. That progression is what an
+interviewer is actually listening for.
+
+The AI section is LLM, GenAI and agentic systems only. No classical ML.
 
 ---
 
-## Start here
+## Two files worth reading on their own
 
 **[dsa/PATTERNS.md](dsa/PATTERNS.md)** — Blind 75 is not 75 problems. It is about
 12 patterns appearing 4–8 times each. Read this before grinding.
