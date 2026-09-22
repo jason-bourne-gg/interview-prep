@@ -1,5 +1,7 @@
 # Interview prep
 
+[![CI](https://github.com/jason-bourne-gg/interview-prep/actions/workflows/ci.yml/badge.svg)](https://github.com/jason-bourne-gg/interview-prep/actions/workflows/ci.yml)
+
 Blind 75 in JavaScript, 21 system design problems, the LLM and agentic round, and
 the rounds that are not about code — written to be *read*, not just copied.
 

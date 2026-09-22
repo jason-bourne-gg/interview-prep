@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  solutions:
+    name: Blind 75 solutions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # Every solution file is self-testing: it asserts each of its approaches
+      # against the same cases, so a regression in the brute-force version is
+      # caught too, not just in the optimal one.
+      - run: node run-tests.js
+
+  links:
+    name: Links and diagrams
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # A relative link that 404s is invisible until someone clicks it.
+      - name: Relative links resolve
+        run: |
+          python3 - <<'PY'
+          import os, re, sys
+          bad = []
+          for root, _, files in os.walk('.'):
+              if '.git' in root or 'node_modules' in root:
+                  continue
+              for f in files:
+                  if not f.endswith('.md'):
+                      continue
+                  path = os.path.join(root, f)
+                  body = re.sub(r'```.*?```', '', open(path).read(), flags=re.S)
+                  for m in re.finditer(r'\[[^\]]*\]\(([^)\s]+?)(?:#[^)]*)?\)', body):
+                      target = m.group(1).strip()
+                      if target.startswith(('http', 'mailto', '#')):
+                          continue
+                      if not os.path.exists(os.path.normpath(os.path.join(root, target))):
+                          bad.append(f'{path} -> {target}')
+          if bad:
+              print('\n'.join(sorted(set(bad))))
+              sys.exit(1)
+          print('all relative links resolve')
+          PY
+
+      # Mermaid needs a DOM to parse. Without jsdom every block "fails", which
+      # is a false alarm; with it, a malformed diagram is caught before it
+      # renders as a red error box on GitHub.
+      - name: Mermaid diagrams parse
+        run: |
+          npm install --no-save mermaid jsdom
+          python3 - <<'PY'
+          import os, re, json
+          blocks = []
+          for root, _, files in os.walk('.'):
+              if '.git' in root or 'node_modules' in root:
+                  continue
+              for f in sorted(files):
+                  if f.endswith('.md'):
+                      path = os.path.join(root, f)
+                      for i, m in enumerate(re.finditer(r'```mermaid\n(.*?)```', open(path).read(), re.S)):
+                          blocks.append({'file': path, 'idx': i, 'src': m.group(1)})
+          json.dump(blocks, open('/tmp/mermaid-blocks.json', 'w'))
+          PY
+          node --input-type=module -e "
+          import fs from 'fs'
+          import { JSDOM } from 'jsdom'
+          const dom = new JSDOM('<!doctype html><html><body></body></html>', { pretendToBeVisual: true })
+          for (const k of ['window','document','navigator','Element','SVGElement','HTMLElement','DOMParser','Node','NodeFilter','getComputedStyle','requestAnimationFrame','MutationObserver'])
+            if (globalThis[k] === undefined) globalThis[k] = dom.window[k]
+          const { default: mermaid } = await import('mermaid')
+          mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' })
+          const blocks = JSON.parse(fs.readFileSync('/tmp/mermaid-blocks.json', 'utf8'))
+          let bad = 0
+          for (const b of blocks) {
+            try { await mermaid.parse(b.src) }
+            catch (e) { bad++; console.log(\`INVALID \${b.file} #\${b.idx}: \${String(e.message).split('\n')[0]}\`) }
+          }
+          if (bad) process.exit(1)
+          console.log(\`all \${blocks.length} mermaid blocks parse\`)
+          "
+
+      # The repo's premise is that you write the solution, not fetch it.
+      - name: No external problem links
+        run: |
+          if grep -rniE 'leetcode\.com|neetcode\.io' --include='*.md' --include='*.js' .; then
+            echo "external problem links are not allowed in this repo"
+            exit 1
+          fi
+          echo "no external problem links"
